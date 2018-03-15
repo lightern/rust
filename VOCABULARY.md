@@ -2,6 +2,20 @@
 
 Thanks to carols10cents from the original! Wanted to add and modify some stuff.
 
+## Adding libraries
+
+C#:
+
+```csharp
+using System.IO;
+```
+
+Rust:
+
+```rust
+use std::io::write;
+```
+
 ## Variables
 
 C#:
