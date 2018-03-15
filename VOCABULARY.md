@@ -4,7 +4,7 @@ Thanks to carols10cents from the original! Wanted to add and modify some stuff.
 
 ## Book and Standard Library reference
 
-```
+```http
 https://doc.rust-lang.org/stable/book/second-edition/ch01-00-introduction.html
 https://doc.rust-lang.org/std/index.html
 ```
