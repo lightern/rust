@@ -27,7 +27,6 @@ fn something() -> Result<i32, std::num::ParseIntError> {
 	Ok(x * 4)
 }
 
-
 fn main() {
     match something() {
         Ok(t) => println!("You win!"),
