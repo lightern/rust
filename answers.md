@@ -19,3 +19,19 @@ fn main() {
     println!("{:?}", Foo {capacity: 3}.capacity);
 }
 ```
+
+Ex. 3
+```rust
+fn something() -> Result<i32, std::num::ParseIntError> {
+	let x:i32 = "3".parse().unwrap();
+	Ok(x * 4)
+}
+
+
+fn main() {
+    match something() {
+        Ok(t) => println!("You win!"),
+        Err(e) => println!("Oh no something went wrong: {}", e),
+    }
+}
+```
