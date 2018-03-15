@@ -20,7 +20,7 @@ fn main() {
 }
 ```
 
-Ex. 3
+Ex. 4
 ```rust
 fn something() -> Result<i32, std::num::ParseIntError> {
 	let x:i32 = "3".parse().unwrap();
