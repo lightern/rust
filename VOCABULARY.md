@@ -1,4 +1,4 @@
-# C# to Rust (to VBA) Vocabulary
+# C# to Rust Vocabulary
 
 Thanks to carols10cents from the original! Wanted to add and modify some stuff.
 
