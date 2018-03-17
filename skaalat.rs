@@ -23,7 +23,7 @@ fn mutate(input: usize, limit: usize) -> usize {
 
 fn main() {
 
-	let inputtext: String = read!("{}\n");
+	let inputtext: String = read!("{}\n");  // For linux, for windows edit \n -> \r\n
 
 	let notes: Vec<&str> = inputtext.split(' ').collect();
 
