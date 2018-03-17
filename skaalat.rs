@@ -16,12 +16,10 @@ fn pause() {
     let _ = stdin.read(&mut [0u8]).unwrap();
 }
 
-
 // Mutates input so that when over number of sounds, starts from beginning
 fn mutate(input: usize, limit: usize) -> usize {
 	if input < limit {input} else {input - limit}
 }
-
 
 fn main() {
 
@@ -34,7 +32,6 @@ fn main() {
 	let scales = vec!["Major", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Minor", "Locrian"];
 	let mut soundnumbers = vec![];
 	let mut hitvec = vec![];
-
 
 	// Calculate how many times every sound listed can be 
 	for x in 0..12 {
