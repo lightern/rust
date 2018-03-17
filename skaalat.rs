@@ -21,6 +21,7 @@ fn mutate(input: usize, limit: usize) -> usize {
 	if input < limit {input} else {input - limit}
 }
 
+
 fn main() {
 	println!("Please enter some sounds separated with whitespace:");
 	let inputtext: String = read!("{}\n");  // For linux, for windows edit \n -> \r\n
@@ -38,7 +39,7 @@ fn main() {
 	
 		// Look for index number for each sound inside sounds group
 		for y in 0..notes.len() {	
-			let index = sounds.iter().position(|&r| r == notes[y]).unwrap() + x;		
+			let index = sounds.iter().position(|&r| r == notes[y]).unwrap() + 12 - x;		
 			let modifiedindex = mutate(index, 12);
 			soundnumbers.push(modifiedindex);
 			}
