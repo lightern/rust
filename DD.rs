@@ -18,8 +18,7 @@ struct HalfElf {
 name: String
 }
 
-
-// 10) Trait Objektit voivat muista traiteista poiketen sisältää tekemisen lisäksi dataa. Trait Objektit sisältävät pointterin heapissa olevaan dataan. Trait Objekteihin ei kuitenkaan voi lisätä dataa. Aloitetaan luomalla taikoja varten structeja, joihin tekemistä voidaan lisätä. Kaikkia voi "castata" (vaikkakin castaamisen tapa voikin erota).
+// 10) Trait Objects can differ from other traits so that on top of doing, they can include data. Trait objects keep inside a pointer to data in heap. Trait Objects however can't add data. Let's create adding spell structs where to add doing. All of them can be casted, but the way of casting may differ.
 struct Cantrip {
 }
 struct Transmutation {
@@ -29,10 +28,9 @@ struct Enchantment {
 struct Necromancy {
 }
 
-
-//13 Luodaan Spellbook jossa pitää taikoja. Luodaan siis structi.
+//13 Let's create a Spellbook where to keep our spells. Ie. we create a struct:
 struct Spellbook {
-pub spells: Vec<Box<Cast>>,}	// spells -field on vectori (tapa groupata objekteja, jotka ovat tiettyä tyyppiä). Tyyppi, jota grouppaamme taioille on Box(Box<T>). Box taas on pointer, joka osoittaa dataan heapissa (ks. kohta 10). Nyt sanotaan, että voidaan ottaa vastaan mikä tahansa tyyppi, joka implementoi Cast Traitin. Tänne siis otetaan vastaan yllä olevat structit, jotka ovat taikaluokkia
+pub spells: Vec<Box<Cast>>,}	// spells -field is a vector (way of grouping objects of a certain type). The type that we are grouping is Box(Box<T>). Box is a pointer that points into data in heap (check 10). We define that any kind of type, that implements Cast trait can be accepted. Ie. we are accepting structs above that are spell classes.
 
 
 // 3) Let's create traits (features/attributes) and in those traits define one function (bonus)
@@ -44,9 +42,9 @@ fn constitution_bonus(&self) -> u8 {0} // We don't define how the constitution_b
 pub trait Elvish {
 }
 
-// 11) Luodaan Cast trait
+// 11) Let's create a Cast trait.
 pub trait Cast {
-fn cast(&self);			// jokaisen castaajan pitää määrittää behaviour cast functiolle
+fn cast(&self);			// Every spell have to itself define a doing to trait.
 }
 
 
@@ -122,7 +120,7 @@ name: String::from("NellHalfElf")
 };
 
 
-// 15 Implementoidaan Spellbook implementaation käyttö
+// 15 Let's implement the implementation of Spellbook:
 let spell_book = Spellbook {
 spells: vec![
 Box::new(Cantrip{}),
@@ -132,16 +130,16 @@ Box::new(Necromancy{}),
 ],
 };
 
-// 5) käytetään dwarffin constitution bonusta
-println!("Dwarfin constitution: {}", my_dwarf.constitution_bonus());
-println!("HalfOrcin constitution: {}", my_half_orc.constitution_bonus());
-println!("HalfOrcin constitution: {}", my_elf.constitution_bonus());
-println!("HalfOrcin constitution: {}", my_human.constitution_bonus());
+// 5) Let's use some constitution bonuses:
+println!("Dwarf's constitution: {}", my_dwarf.constitution_bonus());
+println!("HalfOrc's constitution: {}", my_half_orc.constitution_bonus());
+println!("Elf's constitution: {}", my_elf.constitution_bonus());
+println!("Human's constitution: {}", my_human.constitution_bonus());
 
-// 9) Laitetaan Elf luokan instanssi (ilmentymä) my_elf (nimeltä NellElf), puhumaan Elvishtä:
+// 9) Let's make instance of Elf class, my_elf (name NellElf) to talk Elvish:
 println!("Elf: {}", speak_elvish(my_elf));
 println!("HalfElf: {}", speak_elvish(my_halfelf));
 
-// 16) Ajetaan koko spellbook
+// 16) Let's run the whole spell book:
 spell_book.run();
 }
