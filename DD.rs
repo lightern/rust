@@ -29,21 +29,26 @@ struct Enchantment {
 struct Necromancy {
 }
 
+
 //13 Luodaan Spellbook jossa pitää taikoja. Luodaan siis structi.
 struct Spellbook {
 pub spells: Vec<Box<Cast>>,}	// spells -field on vectori (tapa groupata objekteja, jotka ovat tiettyä tyyppiä). Tyyppi, jota grouppaamme taioille on Box(Box<T>). Box taas on pointer, joka osoittaa dataan heapissa (ks. kohta 10). Nyt sanotaan, että voidaan ottaa vastaan mikä tahansa tyyppi, joka implementoi Cast Traitin. Tänne siis otetaan vastaan yllä olevat structit, jotka ovat taikaluokkia
+
 
 // 3) Let's create traits (features/attributes) and in those traits define one function (bonus)
 pub trait Constitution {
 fn constitution_bonus(&self) -> u8 {0} // We don't define how the constitution_bonus is used, we just expect it to be used somehow. Also we define default to be 0.
 }
+
 // 6) Let's create a language (trait), that only Elf's talk: Elvish (we also need a function for that, since it's not an attribute but doing!)
 pub trait Elvish {
 }
+
 // 11) Luodaan Cast trait
 pub trait Cast {
 fn cast(&self);			// jokaisen castaajan pitää määrittää behaviour cast functiolle
 }
+
 
 // 4) Now let's implement that trait to class struct to override class specific parts if needed and along with implementing we want to define how the constitution_bonus works
 impl Constitution for Dwarf {
@@ -95,7 +100,7 @@ pub fn speak_elvish<T: Elvish>(character: T) -> String {	// Accept argument (cha
 String::from("yes")
 }
 
-
+// Main function --------
 
 fn main() {
 
