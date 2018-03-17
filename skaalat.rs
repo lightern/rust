@@ -58,7 +58,7 @@ fn main() {
 	//soundnumbers.push(soundnumbers[0].unwrap());
 
 	for z in 0..hitvec.len() {
-		println!("{} yhteistä: {} {}, {} {}, {} {}, {} {}, {} {}, {} {}, {} {}", hitvec[mutate(z, 12)], sounds[mutate(z, 12)], scales[0], sounds[mutate(z+2, 12)], scales[1], sounds[mutate(z+4, 12)], scales[1], sounds[mutate(z+5, 12)], scales[1], sounds[mutate(z+7, 12)], scales[1], sounds[mutate(z+9, 12)], scales[1], sounds[mutate(z+2, 11)], scales[1]);
+		println!("{} yhteistä: {} {}, {} {}, {} {}, {} {}, {} {}, {} {}, {} {}", hitvec[mutate(z, 12)], sounds[mutate(z, 12)], scales[0], sounds[mutate(z+2, 12)], scales[1], sounds[mutate(z+4, 12)], scales[1], sounds[mutate(z+5, 12)], scales[1], sounds[mutate(z+7, 12)], scales[1], sounds[mutate(z+9, 12)], scales[1], sounds[mutate(z+11, 12)], scales[1]);
 		}
 pause();
 }
