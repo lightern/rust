@@ -1,6 +1,9 @@
 ## Mitä kaikkea voi tehdä?
 
-Luoda funktion, johon voi viitata: 
+https://rustbyexample.com/
+
+
+Luoda funktion, johon voi viitata (Muista! funktion viimeistä arvoa voidaan käyttää paluuarvona): 
 
 ```rust
 fn mutate(input: usize, limit: usize) -> usize {
