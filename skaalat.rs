@@ -1,35 +1,67 @@
 #[macro_use] extern crate text_io;
 
-struct hits { count: 
+use std::io;			// To make pause possible
+use std::io::prelude::*;	// To make pause possible
+
+// Function for pause
+fn pause() {
+    let mut stdin = io::stdin();
+    let mut stdout = io::stdout();
+
+    // We want the cursor to stay at the end of the line, so we print without a newline and flush manually.
+    write!(stdout, "Press enter to continue...").unwrap();
+    stdout.flush().unwrap();
+
+    // Read a single byte and discard
+    let _ = stdin.read(&mut [0u8]).unwrap();
+}
+
+
+// Mutates input so that when over number of sounds, starts from beginning
+fn mutate(input: usize, limit: usize) -> usize {
+	if input < limit {input} else {input - limit}
+}
+
 
 fn main() {
 
-let inputtext: String = read!("{}\n");
+	let inputtext: String = read!("{}\n");
 
-let notes: Vec<&str> = inputtext.split(' ').collect();
-//assert_eq!(v, ["Mary", "had", "a", "little", "lamb"]);
+	let notes: Vec<&str> = inputtext.split(' ').collect();
 
-let sounds = vec!["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-let scalenumbers = vec![0, 2, 4, 5, 7, 9, 11];
-let scales = vec!["Major", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Minor", "Locrian"];
-
-
-let mut test = 0;
-
-for x in 0..notes.len() {
-// haetaan monesko kokeiltava nuotti on
-let index = sounds.iter().position(|&r| r == notes[x]).unwrap();
-// tsekataan onko kyseinen numero skaalanumerossa
-let test = if scalenumbers.contains(&index) {1} else {0};
-}
-println!("{}", test);
+	let sounds = vec!["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "Bb", "B"];
+	let scalenumbers = vec![0, 2, 4, 5, 7, 9, 11];
+	let scales = vec!["Major", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Minor", "Locrian"];
+	let mut soundnumbers = vec![];
+	let mut hitvec = vec![];
 
 
-//println!("{}", index);
+	// Calculate how many times every sound listed can be 
+	for x in 0..12 {
+	
+		// Look for index number for each sound inside sounds group
+		for y in 0..notes.len() {	
+			let index = sounds.iter().position(|&r| r == notes[y]).unwrap() + x;		
+			let modifiedindex = mutate(index, 12);
+			soundnumbers.push(modifiedindex);
+			}
+	
+		// Look how many times each index number can be found from restricting group
+		let mut counter = 0;
+		let mut hits = 0;
+		loop  {
+				if scalenumbers.contains(&soundnumbers[counter]) {hits += 1} else {};		
+				if counter == soundnumbers.len()-1 {break hits};
+				counter += 1;
+				};
+		hitvec.push(hits);
+		soundnumbers.truncate(0);
+		};
 
-//println!("{}", notes[2]);
-//println!("{} {} {} {} {} {} {}", sounds[0], sounds[2], sounds[4], sounds[5], sounds[7], sounds[9], sounds[11]);
+	//soundnumbers.push(soundnumbers[0].unwrap());
 
-
-//println!("{}", nuotti);
+	for z in 0..hitvec.len() {
+		println!("{} yhteistä: {} {}, {} {}, {} {}, {} {}, {} {}, {} {}, {} {}", hitvec[mutate(z, 12)], sounds[mutate(z, 12)], scales[0], sounds[mutate(z+2, 12)], scales[1], sounds[mutate(z+4, 12)], scales[1], sounds[mutate(z+5, 12)], scales[1], sounds[mutate(z+7, 12)], scales[1], sounds[mutate(z+9, 12)], scales[1], sounds[mutate(z+2, 11)], scales[1]);
+		}
+pause();
 }
