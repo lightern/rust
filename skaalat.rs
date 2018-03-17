@@ -22,7 +22,7 @@ fn mutate(input: usize, limit: usize) -> usize {
 }
 
 fn main() {
-	println!("Please enter some sounds (for example: C D# E):");
+	println!("Please enter some sounds separated with whitespace:");
 	let inputtext: String = read!("{}\n");  // For linux, for windows edit \n -> \r\n
 
 	let notes: Vec<&str> = inputtext.split(' ').collect();
