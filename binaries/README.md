@@ -2,7 +2,8 @@
 
 
 
-In case you want to compile these programs yourself, you will find the source codes from the root folder.
+I was practicing the usage of Rust and I made something for my friend as an exercise (he gave me specs) and he found these very useful for a musician so I decided to share these. In case you want to compile these programs yourself, you will find the source codes from the root folder.
+
 
 
 ## Skaalat
