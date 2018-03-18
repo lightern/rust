@@ -2,7 +2,7 @@
 
 
 
-In case you want to compile these programs yourself, you will find the source codes from root folder.
+In case you want to compile these programs yourself, you will find the source codes from the root folder.
 
 
 ## Skaalat
