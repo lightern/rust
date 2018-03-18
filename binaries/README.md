@@ -1,4 +1,4 @@
-# Some Rust based binaries:
+# Some Rust based programs:
 
 ## skaalat.exe
 
