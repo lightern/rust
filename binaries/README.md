@@ -1,11 +1,14 @@
 # Some Rust based programs:
 
 
+
 In case you want to compile these programs yourself, you will find source codes from root folder.
+
 
 ## Skaalat
 
 Enter some sounds (like: C E G) and it will calculate how many times those sounds can be found from every basic 7 sound scale and mod.
+
 
 ## Soinnut
 
