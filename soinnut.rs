@@ -1,20 +1,21 @@
-// Add dependency text_io = "0.1.7"
-
 #[macro_use] extern crate text_io;
 
-//use std::io;			// If you want to remove loop and make it pause in the end instead
-//use std::io::prelude::*;	// If you want to remove loop and make it pause in the end instead
+//use std::io;				// In case I want to use pause instead of a loop
+//use std::io::prelude::*;	// In case I want to use pause instead of a loop
+/*
+// Function for pause
+fn pause() {
+    let mut stdin = io::stdin();
+    let mut stdout = io::stdout();
 
-// Function to test chords 
-fn testonechord (targetchord: usize, targetsounds: &[usize], version: &'static str, usedsounds: &[usize]) -> u8 {
-	let allsounds = vec!["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "Bb", "B"];
-	for x in 0..targetsounds.len() {
-		if usedsounds.contains(&mutate(targetchord+&targetsounds[x], 12)) {} else {break};
-		if x == targetsounds.len()-1 {println!("{}{}", allsounds[targetchord], version)};
-	}		
-	1	// Added return value in case I want to do something with this in future
+    // We want the cursor to stay at the end of the line, so we print without a newline and flush manually.
+    write!(stdout, "Press enter to continue...").unwrap();
+    stdout.flush().unwrap();
+
+    // Read a single byte and discard
+    let _ = stdin.read(&mut [0u8]).unwrap();
 }
-
+*/
 // Mutates input so that when over number of sounds, starts from beginning
 fn mutate(input: usize, limit: usize) -> usize {
 	if input < limit {input} else {input - limit}
@@ -24,65 +25,52 @@ fn main () {
 	loop {
 		testi();
 	}
-}
+}	
 
 fn testi() {
-    let inputtext = loop {
+    
+	let inputtext = loop {
 	println!("Please enter some sounds separated with whitespace (something else to exit):");
 	let inputtext: String = read!("{}\r\n");  // For linux, for windows edit \n -> \r\n
 	if inputtext.len() == 0 {} else {break inputtext;}
 	};
 
-	let inputnotes: Vec<&str> = inputtext.split(' ').collect();
-	let allsounds = vec!["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "Bb", "B"];
-	let mut allsounds_index = vec![];
-	for i in 0..allsounds.len() {allsounds_index.push(i)}	
-	let duuri = vec![0, 4, 7];	
-	let molli = vec![0, 3, 7];	
-	let _7 = vec![0, 4, 7, 10];
-	let maj7 = vec![0, 4, 7, 11];
-	let m7 = vec![0, 3, 7, 10];
-	let _6 = vec![0, 3, 7, 9];
+	let notes: Vec<&str> = inputtext.split(' ').collect();
+
+	let sounds = vec!["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "Bb", "B"];
+	let scalenumbers = vec![0, 2, 4, 5, 7, 9, 11];
+	let scales = vec!["Major", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Minor", "Locrian"];
+	let mut soundnumbers = vec![];
+	let mut hitvec = vec![];
+
+	// Calculate how many times every sound listed can be 
+	for x in 0..12 {
 	
-	let mut inputnumbers = vec![];
+		// Look for index number for each sound inside sounds group
+		for y in 0..notes.len() {	
+			let index = sounds.iter().position(|&r| r == notes[y]).unwrap() + 12 - x;		
+			let modifiedindex = mutate(index, 12);
+			soundnumbers.push(modifiedindex);
+			}
 	
-	// Look for index number for each sound inside sounds group
-	for x in 0..inputnotes.len() {	
-		let index = allsounds.iter().position(|&r| r == inputnotes[x]).unwrap();		
-		inputnumbers.push(index);
+		// Look how many times each index number can be found from restricting group
+		let mut counter = 0;
+		let mut hits = 0;
+		loop  {
+				if scalenumbers.contains(&soundnumbers[counter]) {hits += 1} else {};		
+				if counter == soundnumbers.len()-1 {break hits};
+				counter += 1;
+				};
+		hitvec.push(hits);
+		soundnumbers.truncate(0);
+		};
+
+	//soundnumbers.push(soundnumbers[0].unwrap());
+
+	for z in 0..hitvec.len() {
+		println!("{} common: {} {}, {} {}, {} {}, {} {}, {} {}, {} {}, {} {}     / {} {} {} {} {} {} {}", hitvec[mutate(z, 12)], sounds[mutate(z, 12)], scales[0], sounds[mutate(z+2, 12)], scales[1], sounds[mutate(z+4, 12)], scales[2], sounds[mutate(z+5, 12)], scales[3], sounds[mutate(z+7, 12)], scales[4], sounds[mutate(z+9, 12)], scales[5], sounds[mutate(z+11, 12)], scales[6], sounds[mutate(z, 12)], sounds[mutate(z+2, 12)], sounds[mutate(z+4, 12)], sounds[mutate(z+5, 12)], sounds[mutate(z+7, 12)], sounds[mutate(z+9, 12)], sounds[mutate(z+11, 12)]);
 		}
-	
-	for x in 0..allsounds_index.len() {
-		if testonechord(allsounds_index[x], &duuri, "      (1 3 5)", &inputnumbers) == 1 {};
-	}
-	for x in 0..allsounds_index.len() {
-		if testonechord(allsounds_index[x], &molli, "m     (1 b3 5)", &inputnumbers) == 1 {};
-	}
-	for x in 0..allsounds_index.len() {
-		if testonechord(allsounds_index[x], &_7, "7     (1 3 5 b7)", &inputnumbers) == 1 {};
-	}
-	for x in 0..allsounds_index.len() {
-		if testonechord(allsounds_index[x], &maj7, "maj7  (1 3 5 7)", &inputnumbers) == 1 {};
-	}
-	for x in 0..allsounds_index.len() {
-		if testonechord(allsounds_index[x], &m7, "m7    (1 b3 5 b7)", &inputnumbers) == 1 {};
-	}
-	for x in 0..allsounds_index.len() {
-		if testonechord(allsounds_index[x], &_6, "6     (1 b3 5 6c)", &inputnumbers) == 1 {};
-	}
+		
 	
 //pause();
 }
-
-/*
-// Function for pause
-fn pause() {
-    let mut stdin = io::stdin();
-    let mut stdout = io::stdout();
-    // We want the cursor to stay at the end of the line, so we print without a newline and flush manually.
-    write!(stdout, "Press enter to continue...").unwrap();
-    stdout.flush().unwrap();
-    // Read a single byte and discard
-    let _ = stdin.read(&mut [0u8]).unwrap();
-}
-*/
