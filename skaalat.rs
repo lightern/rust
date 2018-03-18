@@ -1,8 +1,8 @@
 #[macro_use] extern crate text_io;
 
-use std::io;			// To make pause possible
-use std::io::prelude::*;	// To make pause possible
-
+//use std::io;				// In case I want to use pause instead of a loop
+//use std::io::prelude::*;	// In case I want to use pause instead of a loop
+/*
 // Function for pause
 fn pause() {
     let mut stdin = io::stdin();
@@ -15,16 +15,25 @@ fn pause() {
     // Read a single byte and discard
     let _ = stdin.read(&mut [0u8]).unwrap();
 }
-
+*/
 // Mutates input so that when over number of sounds, starts from beginning
 fn mutate(input: usize, limit: usize) -> usize {
 	if input < limit {input} else {input - limit}
 }
 
+fn main () {
+	loop {
+		testi();
+	}
+}	
 
-fn main() {
-	println!("Please enter some sounds separated with whitespace:");
-	let inputtext: String = read!("{}\n");  // For linux, for windows edit \n -> \r\n
+fn testi() {
+    
+	let inputtext = loop {
+	println!("Please enter some sounds separated with whitespace (something else to exit):");
+	let inputtext: String = read!("{}\r\n");  // For linux, for windows edit \n -> \r\n
+	if inputtext.len() == 0 {} else {break inputtext;}
+	};
 
 	let notes: Vec<&str> = inputtext.split(' ').collect();
 
@@ -61,5 +70,5 @@ fn main() {
 	for z in 0..hitvec.len() {
 		println!("{} common: {} {}, {} {}, {} {}, {} {}, {} {}, {} {}, {} {}", hitvec[mutate(z, 12)], sounds[mutate(z, 12)], scales[0], sounds[mutate(z+2, 12)], scales[1], sounds[mutate(z+4, 12)], scales[2], sounds[mutate(z+5, 12)], scales[3], sounds[mutate(z+7, 12)], scales[4], sounds[mutate(z+9, 12)], scales[5], sounds[mutate(z+11, 12)], scales[6]);
 		}
-pause();
+//pause();
 }
