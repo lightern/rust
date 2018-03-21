@@ -13,7 +13,6 @@ let rivi = match indeksi {
                 _ => 8,
                 };
                 
-                // tsekkaa rivin solut
                 let mut counter = 0;
                 let result = loop {
                     if rivi * 9 + counter != indeksi && sudoku[rivi*9+counter] == sudoku[indeksi] {
@@ -40,12 +39,9 @@ let sarake = match indeksi {
                 _ => 8,
                 };
 
-                // tsekataan sarakkeen solut
                 let mut counter = 0;
                 let result = loop {
                     if counter * 9 + sarake != indeksi && sudoku[counter * 9 + sarake] == sudoku[indeksi] {
-                        //println!("Sudoku indeksi: {}.", indeksi + 1);
-                        //println!("Sarake: {}, rivi: {}.", sarake + 1, counter + 1);
                         break 0;
                     }
                     if counter == 8 {
