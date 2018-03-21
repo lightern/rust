@@ -1,6 +1,5 @@
 use std::process::exit;
 
-
 fn rivitesti(n: usize, indeksi: usize, sudoku: &[usize]) -> usize {
 let rivi = match indeksi {
                 0...8 => 0,
