@@ -12,7 +12,7 @@ cargo run --features gtk_3_22
 
 1) First go to http://www.msys2.org/ and install msys (x86_64) and check to run it after install (needed to install some stuff):
 
-2) Run these commands inside MSYS you just opened and accept when asked to confirm (this will install some stuff for compiler to use):
+2) Run these commands inside MSYS (not Windows cmd!) you just opened and accept when asked to confirm (this will install some stuff for compiler to use):
 ```
 pacman -S mingw-w64-x86_64-gtk3
 pacman -S mingw-w64-x86_64-toolchain
@@ -28,7 +28,7 @@ SETX PATH %PATH%
 ```
 rustup target add x86_64-pc-windows-gnu
 ```
-5) Then compile with command (in cmd and right project folder):
+5) Then compile with command in cmd (in cmd and right project folder):
 ```
 cargo run --features gtk_3_22 --target=x86_64-pc-windows-gnu
 ```
