@@ -5,7 +5,6 @@ authors = ["lightern"]
 
 [dependencies]
 gtk = "^0"
-gdk = "^0"
 
 [features]
 #default = ["gtk_3_22"]
