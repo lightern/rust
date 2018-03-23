@@ -10,28 +10,30 @@ cargo run --features gtk_3_22
 ```
 ## In Windows:
 
-1) First go to http://www.msys2.org/ and install 32 or 64bit version of msys. This is needed to install some stuff later.
+1) First go to http://www.msys2.org/ and install msys (link on top of the page, in case you don't know which version, it's most probably x86_64)) and accept run it after install (needed to install some stuff):
 
-2) 
+2) Run these commands inside MSYS you just opened and accept when asked to confirm (this will install some stuff for compiler to use):
+```
+pacman -S mingw-w64-x86_64-gtk3
+pacman -S mingw-w64-x86_64-toolchain
+```
+3) Make the needed environment variable linkings inside Window's own cmd:
+```
+SET GTK_LIB_DIR=C:\msys64\mingw64\lib
+SET PATH=%PATH%;C:\msys64\mingw64\bin
+SETX GTK_LIB_DIR %GTK_LIB_DIR%
+SETX PATH %PATH%
+```
+4) Add windows-gnu compability to rustup with in cmd:
 ```
 rustup target add x86_64-pc-windows-gnu
 ```
-Then compile with command:
+5) Then compile with command (in cmd and right project folder):
 ```
 cargo run --features gtk_3_22 --target=x86_64-pc-windows-gnu
 ```
-If you get an error, then go to:
-Control Panel → System and Security → System → Advanced system settings → Environment variables and add new variable and try again:
-```
-PKG_CONFIG_ALLOW_CROSS=1
-rustup toolchain install stable-x86_64-pc-windows-gnu
-```
-https://github.com/gtk-rs/gtk/issues/44
 
-https://www.reddit.com/r/rust/comments/6rerw5/tutorial_cross_compiling_a_gtk_program_from_linux/
-
-http://www.mingw.org/wiki/howto_install_the_mingw_gcc_compiler_suite
-
+More info on Windows + Rust + GTK combination:
 http://gtk-rs.org/docs/requirements.html
 
 
