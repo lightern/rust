@@ -1,16 +1,19 @@
-## Mitä kaikkea voi tehdä?
+## What kind of stuff you can do with Rust and how?
 
 https://rustbyexample.com/
 
 
-Luoda funktion, johon voi viitata (Muista! funktion viimeistä arvoa voidaan käyttää paluuarvona): 
-
+Link to other file:
+```rust
+# include!("src/doctest_helper.rs");
+```
+Create a function to which to refer (Remember! the last value in the function can be used as a return value.):
 ```rust
 fn mutate(input: usize, limit: usize) -> usize {
 	if input < limit {input} else {input - limit}
 }
 ```
-Luoda loopin: 
+Create a loop
 ```rust
 let mut counter = 0;
 let mut hits = 0;
