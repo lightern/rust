@@ -15,10 +15,10 @@ rustup target add x86_64-pc-windows-gnu
 Then compile with command:
 cargo run --features gtk_3_22 --target=x86_64-pc-windows-gnu
 
-Currently still gives:
-Cross compilation detected. Use PKG_CONFIG_ALLOW_CROSS=1 to override
+If you get an error, then go to:
+Control Panel → System and Security → System → Advanced system settings → Environment variables and add new variable and try again:
+PKG_CONFIG_ALLOW_CROSS=1
 
-Working on it...
 
 
 Hafe fun!
