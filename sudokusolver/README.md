@@ -5,6 +5,7 @@ Wanted to learn some Rust and wrote little Sudokusolver with little GUI for fun.
 ## In linux:
 
 Compile with command:
+
 cargo run --features gtk_3_22
 
 ## In Windows:
