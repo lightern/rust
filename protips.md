@@ -18,8 +18,8 @@ Create a loop
 let mut counter = 0;
 let mut hits = 0;
 loop  {
-		if scalenumbers.contains(&soundnumbers[counter]) {hits += 1} else {};		
-		if counter == soundnumbers.len()-1 {break hits};
+		if somevector.contains(&somevector[counter]) {hits += 1} else {};		
+		if counter == somevector.len()-1 {break hits};
 		counter += 1;
 		};
 ```
