@@ -5,7 +5,7 @@ https://rustbyexample.com/
 
 Link to other file:
 ```rust
-# include!("src/doctest_helper.rs");
+#include!("src/doctest_helper.rs");
 ```
 Create a function to which to refer (Remember! the last value in the function can be used as a return value.):
 ```rust
