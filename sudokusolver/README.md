@@ -25,8 +25,12 @@ PKG_CONFIG_ALLOW_CROSS=1
 rustup toolchain install stable-x86_64-pc-windows-gnu
 ```
 https://github.com/gtk-rs/gtk/issues/44
+
 https://www.reddit.com/r/rust/comments/6rerw5/tutorial_cross_compiling_a_gtk_program_from_linux/
+
 http://www.mingw.org/wiki/howto_install_the_mingw_gcc_compiler_suite
+
 http://gtk-rs.org/docs/requirements.html
+
 
 Hafe fun!
