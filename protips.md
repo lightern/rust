@@ -3,17 +3,17 @@
 https://rustbyexample.com/
 
 
-Link to other file:
-```rust
-include!("src/doctest_helper.rs");
-```
-Create a function to which to refer (Remember! the last value in the function can be used as a return value.):
+Create a basic function to which to refer (Remember! the last value in the function can be used as a return value.):
 ```rust
 fn mutate(input: usize, limit: usize) -> usize {
 	if input < limit {input} else {input - limit}
 }
 ```
-Create a loop
+Link to other file:
+```rust
+include!("src/doctest_helper.rs");
+```
+Create a loop that modifies some value (doesn't work with for loops in Rust):
 ```rust
 let mut counter = 0;
 let mut hits = 0;
