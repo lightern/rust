@@ -10,7 +10,9 @@ cargo run --features gtk_3_22
 ```
 ## In Windows:
 
-First:
+1) First go to http://www.msys2.org/ and install 32 or 64bit version of msys. This is needed to install some stuff later.
+
+2) 
 ```
 rustup target add x86_64-pc-windows-gnu
 ```
