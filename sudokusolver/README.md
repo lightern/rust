@@ -1,13 +1,13 @@
-## Sudoku Solver with GUI
+# Sudoku Solver with GUI
 
 Wanted to learn some Rust and wrote little Sudokusolver with little GUI for fun. It's quite fast and managed to solve everything I threw in.
 
-# In linux:
+## In linux:
 
 Compile with command:
 cargo run --features gtk_3_22
 
-# In Windows:
+## In Windows:
 
 First:
 rustup target add x86_64-pc-windows-gnu
