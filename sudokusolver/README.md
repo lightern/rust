@@ -10,7 +10,7 @@ cargo run --features gtk_3_22
 ```
 ## In Windows:
 
-1) First go to http://www.msys2.org/ and install msys (link on top of the page, in case you don't know which version, it's most probably x86_64)) and accept run it after install (needed to install some stuff):
+1) First go to http://www.msys2.org/ and install msys (x86_64) and check to run it after install (needed to install some stuff):
 
 2) Run these commands inside MSYS you just opened and accept when asked to confirm (this will install some stuff for compiler to use):
 ```
@@ -35,6 +35,3 @@ cargo run --features gtk_3_22 --target=x86_64-pc-windows-gnu
 
 More info on Windows + Rust + GTK combination:
 http://gtk-rs.org/docs/requirements.html
-
-
-Hafe fun!
