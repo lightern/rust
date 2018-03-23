@@ -1,4 +1,4 @@
-## What kind of stuff you can do with Rust and how?
+## Essential tips I have found useful when writing Rust
 
 https://rustbyexample.com/
 
