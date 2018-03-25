@@ -1,6 +1,7 @@
 ## Essential tips I have found useful when writing Rust
 
 https://rustbyexample.com/
+
 http://words.steveklabnik.com/pointers-in-rust-a-guide
 
 Create a basic function to which to refer (Remember! the last value in the function can be used as a return value.):
