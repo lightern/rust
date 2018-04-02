@@ -1,4 +1,4 @@
-## Essential tips I have found useful when writing Rust
+## Some things I have found useful when writing Rust
 
 https://rustbyexample.com/
 
@@ -8,7 +8,7 @@ https://rcoh.me/posts/things-learned-first-thousand-lines-of-rust/
 
 Define a static character:
 ```rust
-let letter: char = "m".chars().next().unwrap();
+let letter = 'm';
 ```
 Create a basic function to which to refer (Remember! the last value in the function can be used as a return value.):
 ```rust
