@@ -6,6 +6,10 @@ http://words.steveklabnik.com/pointers-in-rust-a-guide
 
 https://rcoh.me/posts/things-learned-first-thousand-lines-of-rust/
 
+Define a static character:
+```rust
+let letter: char = "m".chars().next().unwrap();
+```
 Create a basic function to which to refer (Remember! the last value in the function can be used as a return value.):
 ```rust
 fn mutate(input: usize, limit: usize) -> usize {
