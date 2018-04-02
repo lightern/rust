@@ -6,6 +6,8 @@ http://words.steveklabnik.com/pointers-in-rust-a-guide
 
 https://rcoh.me/posts/things-learned-first-thousand-lines-of-rust/
 
+https://github.com/ctjhoa/rust-learning
+
 Define a static character:
 ```rust
 let letter = 'm';
