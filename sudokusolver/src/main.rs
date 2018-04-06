@@ -296,7 +296,7 @@ pub fn launch() {
                 ));
         }
         else {
-            buffer.set_text(&format!("Please check your input."));
+            buffer.set_text(&format!("Mismatch found. Please check your input."));
         }
     
     let answer = dialog.run();
