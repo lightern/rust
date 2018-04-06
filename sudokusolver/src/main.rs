@@ -1,28 +1,23 @@
 extern crate gtk; // GUI
 use gtk::prelude::*; // GUI
 
-
-// use std::process::exit;  // In case you want to make it without GUI.
-
-
-// make moving clones into closures more convenient
-    macro_rules! clone {
-        (@param _) => ( _ );
-        (@param $x:ident) => ( $x );
-        ($($n:ident),+ => move || $body:expr) => (
-            {
-                $( let $n = $n.clone(); )+
-                move || $body
-            }
-        );
-        ($($n:ident),+ => move |$($p:tt),+| $body:expr) => (
-            {
-                $( let $n = $n.clone(); )+
-                move |$(clone!(@param $p),)+| $body
-            }
-        );
+// Make moving clones into closures more convenient
+macro_rules! clone {
+    (@param _) => ( _ );
+    (@param $x:ident) => ( $x );
+    ($($n:ident),+ => move || $body:expr) => (
+        {
+            $( let $n = $n.clone(); )+
+            move || $body
+        }
+    );
+    ($($n:ident),+ => move |$($p:tt),+| $body:expr) => (
+        {
+            $( let $n = $n.clone(); )+
+            move |$(clone!(@param $p),)+| $body
+        }
+    );
 }
-
 
 fn rowtest(indexnumber: usize, sudoku: &[usize]) -> usize {
     let row = match indexnumber {
@@ -206,9 +201,10 @@ pub fn launch() {
     let smallbutton: gtk::Button = builder.get_object("Button2").expect("Couldn't get button2");
     let textbox: gtk::TextView = builder.get_object("Textbox1").expect("Couldn't get dialog");
     let buffer: gtk::TextBuffer = builder.get_object("Buffer1").expect("Couldn't get buffer");
-    //g_signal_connect_swapped(dialog, "response", G_CALLBACK (gtk_widget_destroy), dialog);
 
-    // window.connect_delete_event(clone!(window => move |_, _| {
+    smallbutton.connect_clicked(clone!(dialog => move |_y| {
+        dialog.hide();
+        }));
 
     bigbutton.connect_clicked(move |_| {
         let mut sudoku = vec![
@@ -226,14 +222,7 @@ pub fn launch() {
         }
 
         let vastaus: &mut Vec<usize> = solve(&mut sudoku);
-        // let mut vastausstring = String::new();
-        // for x in 0..9 {
-        //     vastausstring.push(x.)
-        // }
-        dialog.show_all();
 
-        // let textimport: String = "lollerball".to_string();
-        //buffer.set_text(&textimport);
         buffer.set_text(&format!(
 "{}   {}   {}   |   {}   {}   {}   |   {}   {}   {}
 {}   {}   {}   |   {}   {}   {}   |   {}   {}   {}
@@ -256,16 +245,11 @@ pub fn launch() {
             , vastaus[63], vastaus[64], vastaus[65], vastaus[66], vastaus[67], vastaus[68], vastaus[69], vastaus[70], vastaus[71]
             , vastaus[72], vastaus[73], vastaus[74], vastaus[75], vastaus[76], vastaus[77], vastaus[78], vastaus[79], vastaus[80]
             ));
-
-        
+    dialog.show_all();
     });
 
-    // window.connect_delete_event(clone!(window => move |_, _| {
-    //smallbutton.connect_clicked(move |_y| {dialog.destroy()});
-
-
     window.show_all();
-
+    
     window.connect_delete_event(|_, _| {
         gtk::main_quit();
         Inhibit(false)
