@@ -30,7 +30,7 @@ rustup target add x86_64-pc-windows-gnu
 ```
 5) Then compile with command in cmd (in cmd and right project folder):
 ```
-cargo run --features gtk_3_22 --target=x86_64-pc-windows-gnu
+cargo rustc --features gtk_3_22 --target=x86_64-pc-windows-gnu -- -C link-args=-mwindows
 ```
 
 More info on Windows + Rust + GTK combination:
