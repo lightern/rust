@@ -114,14 +114,43 @@ fn boxtest(indexnumber: usize, sudoku: &[usize]) -> usize {
 fn starttest(sudoku: &[usize]) -> usize {
     let mut numbercount = 0;
     let mut maxcount = 0;
+    
     for i in 1..10 {
+        // Test all
         for ii in 0..9 {
+            // Test current row
             numbercount = sudoku[0+ii*9..9+ii*9].iter().filter(|&n| *n == i).count();
             if numbercount > maxcount {
                 maxcount = numbercount;
             }
+            numbercount = 0;
+            // Test current column
+            for iii in 0..9 {
+                if sudoku[9*iii+ii] == i {numbercount += 1};
+            }
+            if numbercount > maxcount {
+                    maxcount = numbercount;
+                }
+            numbercount = 0;
+            // Test current box
+            let boxvalues = match ii {
+                0 => vec![0, 1, 2, 9, 10, 11, 18, 19, 20],
+                1 => vec![3, 4, 5, 12, 13, 14, 21, 22, 23],
+                2 => vec![6, 7, 8, 15, 16, 17, 24, 25, 26],
+                3 => vec![27, 28, 29, 36, 37, 38, 45, 46, 47],
+                4 => vec![30, 31, 32, 39, 40, 41, 48, 49, 50],
+                5 => vec![33, 34, 35, 42, 43, 44, 51, 52, 53],
+                6 => vec![54, 55, 56, 63, 64, 65, 72, 73, 74],
+                7 => vec![57, 58, 59, 66, 67, 68, 75, 76, 77],
+                _ => vec![60, 61, 62, 69, 70, 71, 78, 79, 80],
+                };
+            for iiii in 0..9 {
+                if sudoku[boxvalues[iiii]] == i {numbercount += 1};
+            }
+            if numbercount > maxcount {
+                    maxcount = numbercount;
+                }
         }
-        
         println!("Numeroa {} yhteensä {} kpl", i, numbercount);
     }
     maxcount
@@ -221,6 +250,7 @@ pub fn launch() {
     smallbutton.connect_clicked(clone!(dialog => move |_y| {
         dialog.hide();
         }));
+    
 
     bigbutton.connect_clicked(move |_| {
         let mut sudoku = vec![
@@ -268,7 +298,11 @@ pub fn launch() {
         else {
             buffer.set_text(&format!("Please check your input."));
         }
-    dialog.show_all();
+    
+    let answer = dialog.run();
+    if answer == -4 {
+        dialog.hide();
+    }
     //     smallbutton.connect_clicked(clone!(dialog => move |_y| {
     
     });
