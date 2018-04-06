@@ -111,6 +111,22 @@ fn boxtest(indexnumber: usize, sudoku: &[usize]) -> usize {
     result
 }
 
+fn starttest(sudoku: &[usize]) -> usize {
+    let mut numbercount = 0;
+    let mut maxcount = 0;
+    for i in 1..10 {
+        for ii in 0..9 {
+            numbercount = sudoku[0+ii*9..9+ii*9].iter().filter(|&n| *n == i).count();
+            if numbercount > maxcount {
+                maxcount = numbercount;
+            }
+        }
+        
+        println!("Numeroa {} yhteensä {} kpl", i, numbercount);
+    }
+    maxcount
+}
+
 fn solve(sudoku: &mut Vec<usize>) -> (&mut Vec<usize>) {
     let mut solvables_index = vec![];
 
@@ -212,6 +228,7 @@ pub fn launch() {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         ];
+
         for n in 1..sudoku.len() + 1 {
             let mut nameref = String::from("entry");
             nameref.push_str(&n.to_string());
@@ -221,11 +238,13 @@ pub fn launch() {
             }
         }
 
-        let vastaus: &mut Vec<usize> = solve(&mut sudoku);
+        let maxcount: usize = starttest(&mut sudoku);
 
-        buffer.set_text(&format!(
-"{}   {}   {}   |   {}   {}   {}   |   {}   {}   {}
-{}   {}   {}   |   {}   {}   {}   |   {}   {}   {}
+        if maxcount < 2 {
+            let vastaus: &mut Vec<usize> = solve(&mut sudoku);
+
+            buffer.set_text(&format!(
+"{}   {}   {}   |   {}   {}   {}   |   {}   {}   {}\n{}   {}   {}   |   {}   {}   {}   |   {}   {}   {}
 {}   {}   {}   |   {}   {}   {}   |   {}   {}   {}
 ------------------------------
 {}   {}   {}   |   {}   {}   {}   |   {}   {}   {}
@@ -235,21 +254,26 @@ pub fn launch() {
 {}   {}   {}   |   {}   {}   {}   |   {}   {}   {}
 {}   {}   {}   |   {}   {}   {}   |   {}   {}   {}
 {}   {}   {}   |   {}   {}   {}   |   {}   {}   {}"
-            , vastaus[0], vastaus[1], vastaus[2], vastaus[3], vastaus[4], vastaus[5], vastaus[6], vastaus[7], vastaus[8]
-            , vastaus[9], vastaus[10], vastaus[11], vastaus[12], vastaus[13], vastaus[14], vastaus[15], vastaus[16], vastaus[17]
-            , vastaus[18], vastaus[19], vastaus[20], vastaus[21], vastaus[22], vastaus[23], vastaus[24], vastaus[25], vastaus[26]
-            , vastaus[27], vastaus[28], vastaus[29], vastaus[30], vastaus[31], vastaus[32], vastaus[33], vastaus[34], vastaus[35]
-            , vastaus[36], vastaus[37], vastaus[38], vastaus[39], vastaus[40], vastaus[41], vastaus[42], vastaus[43], vastaus[44]
-            , vastaus[45], vastaus[46], vastaus[47], vastaus[48], vastaus[49], vastaus[50], vastaus[51], vastaus[52], vastaus[53]
-            , vastaus[54], vastaus[55], vastaus[56], vastaus[57], vastaus[58], vastaus[59], vastaus[60], vastaus[61], vastaus[62]
-            , vastaus[63], vastaus[64], vastaus[65], vastaus[66], vastaus[67], vastaus[68], vastaus[69], vastaus[70], vastaus[71]
-            , vastaus[72], vastaus[73], vastaus[74], vastaus[75], vastaus[76], vastaus[77], vastaus[78], vastaus[79], vastaus[80]
-            ));
+                , vastaus[0], vastaus[1], vastaus[2], vastaus[3], vastaus[4], vastaus[5], vastaus[6], vastaus[7], vastaus[8]
+                , vastaus[9], vastaus[10], vastaus[11], vastaus[12], vastaus[13], vastaus[14], vastaus[15], vastaus[16], vastaus[17]
+                , vastaus[18], vastaus[19], vastaus[20], vastaus[21], vastaus[22], vastaus[23], vastaus[24], vastaus[25], vastaus[26]
+                , vastaus[27], vastaus[28], vastaus[29], vastaus[30], vastaus[31], vastaus[32], vastaus[33], vastaus[34], vastaus[35]
+                , vastaus[36], vastaus[37], vastaus[38], vastaus[39], vastaus[40], vastaus[41], vastaus[42], vastaus[43], vastaus[44]
+                , vastaus[45], vastaus[46], vastaus[47], vastaus[48], vastaus[49], vastaus[50], vastaus[51], vastaus[52], vastaus[53]
+                , vastaus[54], vastaus[55], vastaus[56], vastaus[57], vastaus[58], vastaus[59], vastaus[60], vastaus[61], vastaus[62]
+                , vastaus[63], vastaus[64], vastaus[65], vastaus[66], vastaus[67], vastaus[68], vastaus[69], vastaus[70], vastaus[71]
+                , vastaus[72], vastaus[73], vastaus[74], vastaus[75], vastaus[76], vastaus[77], vastaus[78], vastaus[79], vastaus[80]
+                ));
+        }
+        else {
+            buffer.set_text(&format!("Please check your input."));
+        }
     dialog.show_all();
-    });
-
-    window.show_all();
+    //     smallbutton.connect_clicked(clone!(dialog => move |_y| {
     
+    });
+    window.show_all();
+
     window.connect_delete_event(|_, _| {
         gtk::main_quit();
         Inhibit(false)
