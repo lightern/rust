@@ -1,0 +1,7 @@
+[package]
+name = "smtpclient"
+version = "0.1.0"
+authors = ["lightern"]
+
+[dependencies]
+lettre = "0.8.2"
