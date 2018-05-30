@@ -1,6 +1,6 @@
 # Sudoku Solver with GUI
 
-Wanted to learn some Rust and wrote little Sudokusolver with little GUI for fun. It's quite fast and managed to solve everything I threw in.
+Wanted to learn some Rust and wrote little Sudokusolver with little GUI (GTK) for fun. It's quite fast and managed to solve everything I threw in.
 
 ## In Linux:
 
